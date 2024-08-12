@@ -9,19 +9,25 @@ function App() {
     {id:2, description:'uniqlo', amount:25, category:'clothes'},
     {id:3, description:'Ramen', amount:15, category:'food'}
   ])
-  const onDelete = (id:number) => {
-    console.log(id)
+  const [selectedCategory, setSelectedCategory] = useState('')
+
+  const onDelete = (id: number) => {
+    const newExpenses = expenses.filter(expense => expense.id !== id )
+    setExpenses(newExpenses)
   }
 
   const onSelect = (category:string) => { 
-    console.log(category)
+    setSelectedCategory(category)
   }
+  console.log(selectedCategory)
+  const viewExpenses = selectedCategory ? expenses.filter(expense => expense.category === selectedCategory) : expenses
+  
   return (
     <div className="App">
       <div className='mb-3'>
         <ExpenseFilter onSelect={onSelect} />
       </div>
-      <ExpenseList expenses={expenses} onDelete={onDelete} />
+      <ExpenseList expenses={viewExpenses} onDelete={onDelete} />
     </div>
   )
 }

@@ -8,7 +8,7 @@ const ExpenseFilter = ({onSelect}: Props) => {
   return (
     <div>
       <select className='form-select' aria-label='Default select example' onChange={(event)=>onSelect(event.target.value)}>
-        <option selected>Choose Category</option>
+        <option selected value=''>Choose Category</option>
         <option value='food'>food</option>
         <option value='clothes'>clothes</option>
         <option value='entertainment'>entertainment</option>
