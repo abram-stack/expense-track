@@ -23,7 +23,6 @@ function App() {
     setSelectedCategory(category)
   }
 
-
   const viewExpenses = selectedCategory ? expenses.filter(expense => expense.category === selectedCategory) : expenses
   
   return (

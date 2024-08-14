@@ -75,7 +75,7 @@ const ExpenseForm = ({onSubmit}:Props) => {
           )}
         </div>
         <div className='mb-3'>
-          <label htmlFor='category' className='form-label'>Category</label>
+          <label htmlFor='category' className='form-label'>Select Category</label>
           <select
             {...register('category')}
             id='category'
