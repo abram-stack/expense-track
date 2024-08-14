@@ -22,7 +22,7 @@ const ExpenseForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<FormData>({ resolver: zodResolver(schema) })
 
   const onSubmit = (data: FieldValues) => {
@@ -73,7 +73,7 @@ const ExpenseForm = () => {
           </select>
         </div>
 
-        <button className='btn btn-primary'>Submit</button>
+        <button disabled={!isValid } className='btn btn-primary'>Submit</button>
       </form>
     </div>
   )
