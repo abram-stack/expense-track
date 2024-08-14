@@ -1,7 +1,10 @@
 import { ChangeEvent, useState } from 'react'
 import ExpenseList from './assets/components/ExpenseList'
 import ExpenseFilter from './assets/components/ExpenseFilter'
+import ExpenseForm from './assets/components/ExpenseForm'
 
+//simulate data from DB
+export const categories = ['food', 'clothes', 'entertainment']
 
 function App() {
   const [expenses, setExpenses] = useState([
@@ -24,6 +27,9 @@ function App() {
   
   return (
     <div className="App">
+      <div className="mb-5">
+        <ExpenseForm /> 
+      </div>
       <div className='mb-3'>
         <ExpenseFilter onSelect={onSelect} />
       </div>
