@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import { categories } from '../../App'
+import categories from '../../categories'
 
 interface Props{
   onSelect:(category:string) => void

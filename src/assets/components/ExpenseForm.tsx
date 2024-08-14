@@ -1,22 +1,25 @@
 import React from 'react'
-import { categories } from '../../App'
 import { FieldValues, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import categories from '../../categories';
 
 // interface FormData{
 //   description: string;
 //   amount: number;
 // }
+
 const schema = z.object({
   description: z
     .string()
     .min(3, { message: 'Description must be at least 3 characters long' }),
-  amount: z.number({ invalid_type_error: 'Amount is required' }).min(1),
+  amount: z.number({ invalid_type_error: 'Amount is required' }).min(0.01).max(100_000),
+  category: z.enum(categories)
 })
 
+type FormData = z.infer<typeof schema>
+
 const ExpenseForm = () => {
-  type FormData = z.infer<typeof schema>
 
   //with register useForm, no longer need state
   const {
@@ -63,8 +66,12 @@ const ExpenseForm = () => {
           )}
         </div>
         <div className='mb-3'>
-          <label>Category</label>
-          <select className='form-select' aria-label='select category'>
+          <label htmlFor='category' className='form-label'>Category</label>
+          <select
+            {...register('category')}
+            id='category'
+            className='form-select'
+            aria-label='select category'>
             {categories.map((category) => (
               <option key={category} value={category}>
                 {category}

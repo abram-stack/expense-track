@@ -3,8 +3,7 @@ import ExpenseList from './assets/components/ExpenseList'
 import ExpenseFilter from './assets/components/ExpenseFilter'
 import ExpenseForm from './assets/components/ExpenseForm'
 
-//simulate data from DB
-export const categories = ['food', 'clothes', 'entertainment']
+
 
 function App() {
   const [expenses, setExpenses] = useState([
@@ -22,7 +21,8 @@ function App() {
   const onSelect = (category:string) => { 
     setSelectedCategory(category)
   }
-  console.log(selectedCategory)
+
+  
   const viewExpenses = selectedCategory ? expenses.filter(expense => expense.category === selectedCategory) : expenses
   
   return (
