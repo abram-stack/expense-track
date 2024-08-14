@@ -4,37 +4,46 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import categories from '../../categories';
 
+interface Props{
+  onSubmit: (data:FormData) => void
+}
+
 // interface FormData{
 //   description: string;
 //   amount: number;
 // }
-
 const schema = z.object({
   description: z
     .string()
     .min(3, { message: 'Description must be at least 3 characters long' }),
   amount: z.number({ invalid_type_error: 'Amount is required' }).min(0.01).max(100_000),
-  category: z.enum(categories)
+  category: z.enum(categories, {
+    errorMap: ()=> ({message: 'Category is required'})
+  })
 })
 
 type FormData = z.infer<typeof schema>
 
-const ExpenseForm = () => {
+const ExpenseForm = ({onSubmit}:Props) => {
 
   //with register useForm, no longer need state
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
   } = useForm<FormData>({ resolver: zodResolver(schema) })
 
-  const onSubmit = (data: FieldValues) => {
-    console.log(data)
-  }
+  // const onSubmit = (data: FieldValues) => {
+  //   console.log(data)
+  // }
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit((data) => { 
+        reset(),
+        onSubmit(data)
+      })}>
         <div className='mb-3'>
           <label htmlFor='description' className='form-label'>
             Description
